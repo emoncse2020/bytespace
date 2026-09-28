@@ -31,6 +31,19 @@ export const TOPIC_TABS = [
 ];
 
 /* Card order and artwork follow the design's grid, left to right. */
+/* Chip row on the search screen, in the design's order. */
+export const SEARCH_TABS = [
+  "Featured",
+  "Music",
+  "Drawing & Painting",
+  "Marketing",
+  "Animation",
+  "Social Media",
+  "UI/UX Design",
+  "Creative Marketing",
+  "Cooking",
+];
+
 const CATALOGUE: Array<[string, string]> = [
   ["Learn Figma from Basic", "/assets/courses/thumb-figma.jpg"],
   ["Build Digital Asset", "/assets/courses/thumb-sample.png"],
