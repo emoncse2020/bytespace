@@ -76,11 +76,8 @@ Satoshi and Clash Display are Fontshare faces, loaded from the Fontshare CDN; Po
 
 **Responsive behaviour.** The Figma file contains desktop frames only (all nine screens are 1440px wide; there are no tablet or mobile frames). Desktop reproduces the design exactly. Below 1440px the layout degrades sensibly — fluid container, grids collapsing 3 → 2 → 1, decorative ornaments hidden — which is an extension beyond the source rather than something taken from it.
 
-**Corrections to the source file.** Four defects in the design were fixed rather than reproduced:
+**Fidelity to the source.** The design file is reproduced as drawn, including details that look like mistakes but are what the design specifies: the footer newsletter button is labelled "Search", and the three footer link columns carry no headings.
 
-1. The footer newsletter button was labelled "Search", copied from the hero search bar → shipped as **Subscribe**.
-2. The footer column headings "Browse" and "Platform" were set to transparent and so were invisible → made visible.
-3. A footer column was `1667px` wide, a typo for `167px` → corrected.
-4. The `Black/50` colour variable had no value defined → unused.
+One genuine gap in the source is left alone: the `Black/50` colour variable has no value defined in Figma, and nothing references it.
 
 **Accessibility.** Semantic landmarks and headings, labelled form controls, `aria-label` on icon-only buttons, visible focus rings, and alt text on meaningful images with decorative ones marked `aria-hidden`.

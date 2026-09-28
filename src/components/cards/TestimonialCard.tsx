@@ -9,7 +9,7 @@ export type Testimonial = {
 
 export default function TestimonialCard({ item }: { item: Testimonial }) {
   return (
-    <figure className="flex w-full max-w-[374px] flex-col gap-6 rounded-card bg-white p-6">
+    <figure className="flex w-full max-w-[374px] flex-col gap-6 rounded-card bg-white p-6 shadow-[0_2px_12px_rgba(16,24,40,0.05)]">
       <Image
         src={item.avatar}
         alt=""
