@@ -92,10 +92,12 @@ export default function CourseShell() {
           </section>
 
           <div
-            className="absolute left-1/2 hidden w-[1200px] -translate-x-1/2 lg:block"
+            /* the wrapper spans the full content column, so it must not
+               swallow clicks meant for the tabs underneath it */
+            className="pointer-events-none absolute left-1/2 hidden w-[1200px] -translate-x-1/2 lg:block"
             style={{ top: 416 }}
           >
-            <div className="flex justify-end">
+            <div className="pointer-events-auto flex justify-end">
               <CourseSidebar />
             </div>
           </div>
