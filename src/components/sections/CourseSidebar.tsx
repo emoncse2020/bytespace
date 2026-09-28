@@ -23,7 +23,7 @@ const INCLUDES = [
 /** 412 x 959 card, overlapping the hero from y=416 in the design. */
 export default function CourseSidebar() {
   return (
-    <aside className="flex w-full max-w-[412px] flex-col gap-6 rounded-card border border-gray-200 bg-white p-10">
+    <aside className="pointer-events-auto flex w-full max-w-[412px] flex-col gap-6 rounded-card border border-gray-200 bg-white p-10">
       <div className="flex flex-col gap-6">
         <p className="font-display track-tight text-[20px] leading-[1.2] font-semibold text-gray-950">
           112 Lessons (24 hours)

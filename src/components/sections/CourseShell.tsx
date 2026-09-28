@@ -97,7 +97,7 @@ export default function CourseShell() {
             className="pointer-events-none absolute left-1/2 hidden w-[1200px] -translate-x-1/2 lg:block"
             style={{ top: 416 }}
           >
-            <div className="pointer-events-auto flex justify-end">
+            <div className="flex justify-end">
               <CourseSidebar />
             </div>
           </div>
