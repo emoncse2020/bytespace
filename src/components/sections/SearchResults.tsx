@@ -22,9 +22,18 @@ const RESULTS = [...COURSES, ...COURSES, ...COURSES];
 
 const PAGES = [1, 2, 3, 4, 5];
 
-export default function SearchResults() {
+export default function SearchResults({ query = "" }: { query?: string }) {
   const [active, setActive] = useState(SEARCH_TABS[0]);
   const [page, setPage] = useState(1);
+
+  const term = query.trim().toLowerCase();
+  const results = term
+    ? RESULTS.filter(
+        (c) =>
+          c.title.toLowerCase().includes(term) ||
+          c.author.toLowerCase().includes(term),
+      )
+    : RESULTS;
 
   return (
     <section className="bg-white py-[72px]">
@@ -78,11 +87,17 @@ export default function SearchResults() {
         </div>
 
         {/* results grid — three columns, 40px gutters */}
-        <div className="grid justify-items-center gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {RESULTS.map((course, i) => (
-            <CourseCard key={`${course.id}-${i}`} course={course} />
-          ))}
-        </div>
+        {results.length > 0 ? (
+          <div className="grid justify-items-center gap-10 sm:grid-cols-2 lg:grid-cols-3">
+            {results.map((course, i) => (
+              <CourseCard key={`${course.id}-${i}`} course={course} />
+            ))}
+          </div>
+        ) : (
+          <p className="py-16 text-center text-[18px] leading-[1.6] text-gray-400">
+            No courses match &ldquo;{query.trim()}&rdquo;.
+          </p>
+        )}
 
         {/* pagination */}
         <nav

@@ -10,13 +10,19 @@ export const metadata: Metadata = {
     "Browse courses across design, development, marketing and more on ByteSpace.",
 };
 
-export default function SearchPage() {
+export default async function SearchPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>;
+}) {
+  const { q = "" } = await searchParams;
+
   return (
     <>
       <Header active="Courses" />
       <main>
-        <SearchHero />
-        <SearchResults />
+        <SearchHero initialQuery={q} />
+        <SearchResults query={q} />
       </main>
       <Footer />
     </>

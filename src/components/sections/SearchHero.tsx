@@ -1,8 +1,15 @@
+"use client";
+
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { ChevronDown } from "@/components/ui/SearchIcons";
 
 /** 1440 x 360 blue band: grid, title, then the search row at y=239. */
-export default function SearchHero() {
+export default function SearchHero({ initialQuery = "" }: { initialQuery?: string }) {
+  const router = useRouter();
+  const [query, setQuery] = useState(initialQuery);
+
   return (
     <section className="relative overflow-hidden bg-blue-800 pt-[120px] pb-16 lg:h-[360px] lg:pb-0">
       <div
@@ -23,6 +30,11 @@ export default function SearchHero() {
         <form
           role="search"
           className="flex w-full max-w-[624px] flex-col items-center gap-4 sm:flex-row"
+          onSubmit={(e) => {
+            e.preventDefault();
+            const q = query.trim();
+            router.push(q ? `/search?q=${encodeURIComponent(q)}` : "/search");
+          }}
         >
           <label className="flex h-[48px] w-full items-center gap-2 rounded-pill bg-white px-6 sm:flex-1">
             <Image
@@ -33,6 +45,8 @@ export default function SearchHero() {
             />
             <input
               type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
               placeholder="Search"
               aria-label="Search courses"
               className="h-full flex-1 border-0 bg-transparent text-[16px] text-gray-950 placeholder:text-gray-400 focus:outline-none"

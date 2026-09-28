@@ -48,7 +48,11 @@ export default function CourseCard({
       : "/assets/icons/badge-26.svg";
   const counterText = tone === "auth" ? "text-white" : "text-gray-950";
   return (
-    <article className="group w-full max-w-[373px] overflow-hidden rounded-card border border-gray-200 bg-white p-[15px] transition-shadow duration-300 hover:shadow-lg">
+    <Link
+      href="/course"
+      aria-label={course.title}
+      className="group block w-full max-w-[373px] overflow-hidden rounded-card border border-gray-200 bg-white p-[15px] transition-shadow duration-300 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-800"
+    >
       {/* thumbnail with translucent meta badges */}
       <div className="relative h-[195px] w-full overflow-hidden rounded-thumb bg-thumb-fallback">
         <Image
@@ -70,12 +74,9 @@ export default function CourseCard({
       <div className="flex items-start justify-between gap-2 pt-4">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col">
-            <Link
-              href="#"
-              className="font-display track-tight block w-[235px] truncate text-[20px] leading-[28px] font-semibold text-ink-950 transition-colors hover:text-blue-800"
-            >
+            <span className="font-display track-tight block w-[235px] truncate text-[20px] leading-[28px] font-semibold text-ink-950 transition-colors group-hover:text-blue-800">
               {course.title}
-            </Link>
+            </span>
             <p className="text-[12px] leading-[20px] text-ink-700">
               by <span className="text-blue-800">{course.author}</span>
             </p>
@@ -135,6 +136,6 @@ export default function CourseCard({
           <Image src={star} alt="rating" width={24} height={24} />
         </div>
       </div>
-    </article>
+    </Link>
   );
 }
