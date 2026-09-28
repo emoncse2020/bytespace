@@ -23,7 +23,7 @@ export default function SignUpPage() {
       heading="Create an account"
       intro="The registration process is straightforward, uncomplicated, and efficient, allowing users to sign up quickly, easily, and at no cost"
     >
-      <div className="flex flex-col gap-10">
+      <div className="flex h-full flex-col gap-10">
         <div className="flex flex-col">
           <p className="text-[18px] leading-[1.6] text-blue-800">
             Create an Account
@@ -56,7 +56,7 @@ export default function SignUpPage() {
           <Button type="submit">Continue</Button>
         </form>
 
-        <p className="text-[18px] leading-[1.6] text-gray-700">
+        <p className="mt-auto text-center text-[18px] leading-[1.6] text-gray-700">
           Already have an account?{" "}
           <Link href="/login" className="text-blue-800 hover:underline">
             Login

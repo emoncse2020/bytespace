@@ -26,11 +26,27 @@ const AVATARS = [
 export default function CourseCard({
   course,
   badges = true,
+  tone = "grid",
 }: {
   course: Course;
   /** false when the thumbnail already has the meta chips baked in */
   badges?: boolean;
+  /**
+   * The design styles these two details differently per screen: the home
+   * grid uses a grey star with a lime counter, the auth screens a lime
+   * star with a dark counter.
+   */
+  tone?: "grid" | "auth";
 }) {
+  const star =
+    tone === "auth"
+      ? "/assets/icons/star-rate-lime.svg"
+      : "/assets/icons/star-rate.svg";
+  const counter =
+    tone === "auth"
+      ? "/assets/icons/badge-26-dark.svg"
+      : "/assets/icons/badge-26.svg";
+  const counterText = tone === "auth" ? "text-white" : "text-gray-950";
   return (
     <article className="group w-full max-w-[373px] overflow-hidden rounded-card border border-gray-200 bg-white p-[15px] transition-shadow duration-300 hover:shadow-lg">
       {/* thumbnail with translucent meta badges */}
@@ -91,13 +107,13 @@ export default function CourseCard({
               ))}
               <span className="relative ml-2 inline-flex h-8 w-8 items-center justify-center">
                 <Image
-                  src="/assets/icons/badge-26.svg"
+                  src={counter}
                   alt=""
                   width={32}
                   height={32}
                   className="absolute inset-0"
                 />
-                <span className="relative text-[12px] leading-[20px] font-medium text-gray-950">
+                <span className={`relative text-[12px] leading-[20px] font-medium ${counterText}`}>
                   {course.enrolled}
                 </span>
               </span>
@@ -116,7 +132,7 @@ export default function CourseCard({
           <span className="text-[18px] leading-[28px] font-medium text-ink-700">
             {course.rating}
           </span>
-          <Image src="/assets/icons/star-rate.svg" alt="rating" width={24} height={24} />
+          <Image src={star} alt="rating" width={24} height={24} />
         </div>
       </div>
     </article>
