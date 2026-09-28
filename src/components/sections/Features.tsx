@@ -4,9 +4,9 @@ import Ornament from "@/components/ui/Ornament";
 import { COURSES, HERO_AVATARS } from "@/data/content";
 
 /**
- * Mesh background fitted to colours sampled from the design: lime blooms at
- * the top centre-left and bottom left, periwinkle down the left flank and
- * across the right, over a #FAFAFA base. Residual ~2.7 per channel RMS.
+ * Mesh background fitted to colours sampled from the design render:
+ * lime blooms top centre-left and bottom left, periwinkle down the left
+ * flank and across the right, over #FAFAFA. ~2.7 per channel RMS.
  */
 const MESH =
   "radial-gradient(39% 46% at 29% 7%, rgba(203,252,1,0.38) 0%, rgba(203,252,1,0) 75%)," +
@@ -44,11 +44,11 @@ function CheckIcon() {
   );
 }
 
-const CARD = "rounded-[16px] bg-white shadow-[0_8px_28px_rgba(16,24,40,0.10)]";
+const CARD = "rounded-[16px] bg-white shadow-[0_10px_34px_rgba(16,24,40,0.12)]";
 
-function LearningProgress({ className = "" }: { className?: string }) {
+function LearningProgress() {
   return (
-    <div className={`${CARD} flex w-[240px] flex-col gap-2 p-5 ${className}`}>
+    <div className={`${CARD} flex w-[235px] flex-col gap-2 p-5`}>
       <span className="text-[14px] leading-[1.2] font-medium text-gray-950">
         Learning Progress
       </span>
@@ -62,9 +62,9 @@ function LearningProgress({ className = "" }: { className?: string }) {
   );
 }
 
-function HappyStudents({ className = "" }: { className?: string }) {
+function HappyStudents() {
   return (
-    <div className={`${CARD} flex w-[255px] flex-col gap-2 p-4 ${className}`}>
+    <div className={`${CARD} flex w-[255px] flex-col gap-2 p-4`}>
       <span className="text-[16px] leading-[1.2] font-medium text-gray-950">
         Happy Students
       </span>
@@ -106,21 +106,19 @@ function RevenueCard({
   value,
   delta,
   bar,
-  className = "",
-  style,
+  width,
 }: {
   title: string;
   sub: string;
   value: string;
   delta?: string;
   bar?: boolean;
-  className?: string;
-  style?: React.CSSProperties;
+  width: number;
 }) {
   return (
     <div
-      style={style}
-      className={`flex flex-col gap-0.5 rounded-[12px] bg-blue-800 p-4 text-white shadow-[0_8px_24px_rgba(0,59,226,0.28)] ${className}`}
+      style={{ width }}
+      className="flex flex-col gap-0.5 rounded-[12px] bg-blue-800 p-4 text-white shadow-[0_10px_28px_rgba(0,59,226,0.30)]"
     >
       <span className="text-[15px] leading-[1.25] font-medium">{title}</span>
       <span className="text-[11px] leading-[1.3] opacity-75">{sub}</span>
@@ -141,11 +139,11 @@ function RevenueCard({
   );
 }
 
-/* ----------------------------- text columns ----------------------------- */
+/* ------------------------------ text blocks ------------------------------ */
 
 function GrowthText() {
   return (
-    <div className="flex max-w-[564px] flex-col gap-8">
+    <div className="flex flex-col gap-11">
       <h2 className="font-display track-tight text-[32px] leading-[1.2] font-semibold text-ink-950 sm:text-[44px]">
         Your Path to Professional Growth Starts Here!
       </h2>
@@ -171,7 +169,7 @@ function GrowthText() {
 
 function CreateText() {
   return (
-    <div className="flex max-w-[580px] flex-col gap-8">
+    <div className="flex flex-col gap-11">
       <h2 className="font-display track-tight text-[32px] leading-[1.2] font-semibold text-ink-950 sm:text-[44px]">
         Create &amp; Manage Courses Easily.
       </h2>
@@ -195,51 +193,128 @@ function CreateText() {
   );
 }
 
-/* -------------------------------- section -------------------------------- */
+/* --------------------------------- section -------------------------------- */
+
+const At = ({
+  x,
+  y,
+  z,
+  children,
+}: {
+  x: number;
+  y: number;
+  z?: number;
+  children: React.ReactNode;
+}) => (
+  <div className="absolute" style={{ left: x, top: y, zIndex: z }}>
+    {children}
+  </div>
+);
 
 export default function Features() {
   return (
-    <section className="overflow-hidden py-24" style={{ background: MESH }}>
-      <div className="container-1200 flex flex-col gap-24 xl:gap-[110px]">
-        {/* ---------------- block one: text left, collage right ---------------- */}
-        <div className="flex flex-col gap-12 xl:flex-row xl:items-start xl:gap-5">
-          <div className="xl:w-[564px] xl:shrink-0 xl:pt-[66px]">
-            <GrowthText />
-          </div>
+    <section className="relative overflow-hidden" style={{ background: MESH }}>
+      {/*
+        Desktop: an exact 1440x1460 canvas. Both collages deliberately run
+        outside the 1200 content column in the design - block one reaches
+        x=1392 and block two starts at x=55 - so they are placed on the
+        canvas rather than inside the container.
+      */}
+      <div className="relative mx-auto hidden h-[1460px] w-[1440px] xl:block">
+        {/* block one — text */}
+        <div className="absolute" style={{ left: 120, top: 195, width: 564 }}>
+          <GrowthText />
+        </div>
 
-          {/* exact collage, design coords relative to (760,100) */}
-          <div className="relative hidden h-[610px] w-[585px] shrink-0 xl:block">
-            <div className="absolute" style={{ left: 3, top: 13, width: 373 }}>
-              <CourseCard course={{ ...COURSES[5], thumb: COURSES[0].thumb }} />
-            </div>
-            <Image
-              src="/assets/hero/student.png"
-              alt="A ByteSpace learner"
-              width={440}
-              height={580}
-              className="absolute object-contain"
-              style={{ left: 145, top: 20, width: 440, height: 580 }}
+        {/* block one — collage */}
+        <At x={763} y={113} z={10}>
+          <div style={{ width: 373 }}>
+            <CourseCard course={{ ...COURSES[5], thumb: COURSES[0].thumb }} />
+          </div>
+        </At>
+        <At x={880} y={120} z={20}>
+          <Image
+            src="/assets/hero/student.png"
+            alt="A ByteSpace learner"
+            width={500}
+            height={600}
+            className="object-cover object-top"
+            style={{ width: 500, height: 600 }}
+          />
+        </At>
+        <At x={1209} y={212} z={30}>
+          <div style={{ width: 124, height: 162 }} className="relative">
+            <Ornament
+              src="/assets/ornaments/spiral-b.png"
+              mask="/assets/ornaments/spiral-b-mask.png"
+              tint="#d4fb20"
+              left={0}
+              top={0}
+              size={124}
             />
-            <div
-              className="pointer-events-none absolute"
-              style={{ left: 449, top: 112, width: 124, height: 162 }}
-            >
-              <Ornament
-                src="/assets/ornaments/spiral-b.png"
-                mask="/assets/ornaments/spiral-b-mask.png"
-                tint="#d4fb20"
-                left={0}
-                top={0}
-                size={124}
-              />
-            </div>
-            <div className="absolute" style={{ left: 340, top: 240 }}>
-              <LearningProgress />
-            </div>
           </div>
+        </At>
+        <At x={1103} y={340} z={40}>
+          <LearningProgress />
+        </At>
 
-          {/* compact stand-in below xl */}
-          <div className="relative mx-auto block h-[380px] w-[300px] xl:hidden">
+        {/* block two — collage */}
+        <At x={121} y={788} z={10}>
+          <RevenueCard
+            title="Total Revenue"
+            sub="July 1-28"
+            value="$120.29"
+            bar
+            width={218}
+          />
+        </At>
+        <At x={121} y={938} z={10}>
+          <RevenueCard
+            title="Year to Date"
+            sub="2023"
+            value="$1,200.38"
+            delta="+12$"
+            width={134}
+          />
+        </At>
+        <At x={55} y={718} z={20}>
+          <Image
+            src="/assets/hero/student-female.png"
+            alt="A ByteSpace creator"
+            width={589}
+            height={712}
+            className="object-contain"
+            style={{ width: 589, height: 712 }}
+          />
+        </At>
+        <At x={460} y={894} z={30}>
+          <div style={{ width: 141, height: 150 }} className="relative">
+            <Ornament
+              src="/assets/ornaments/spiral-a.png"
+              mask="/assets/ornaments/spiral-a-mask.png"
+              tint="#d4fb20"
+              left={0}
+              top={0}
+              size={141}
+            />
+          </div>
+        </At>
+        <At x={405} y={1160} z={40}>
+          <HappyStudents />
+        </At>
+
+        {/* block two — text */}
+        <div className="absolute" style={{ left: 740, top: 850, width: 580 }}>
+          <CreateText />
+        </div>
+      </div>
+
+      {/* Below xl: stacked, with the photography kept but the overlay
+          collages simplified so nothing collides. */}
+      <div className="container-1200 flex flex-col gap-20 py-20 xl:hidden">
+        <div className="flex flex-col gap-10">
+          <GrowthText />
+          <div className="relative mx-auto h-[360px] w-full max-w-[420px]">
             <Image
               src="/assets/hero/student.png"
               alt="A ByteSpace learner"
@@ -248,55 +323,8 @@ export default function Features() {
             />
           </div>
         </div>
-
-        {/* ---------------- block two: collage left, text right ---------------- */}
-        <div className="flex flex-col-reverse gap-12 xl:flex-row xl:items-start xl:gap-5">
-          {/* exact collage, design coords relative to (110,770) */}
-          <div className="relative hidden h-[630px] w-[595px] shrink-0 xl:block">
-            <RevenueCard
-              title="Total Revenue"
-              sub="July 1-28"
-              value="$120.29"
-              bar
-              className="absolute"
-              style={{ left: 11, top: 18, width: 218 }}
-            />
-            <RevenueCard
-              title="Year to Date"
-              sub="2023"
-              value="$1,200.38"
-              delta="+12$"
-              className="absolute"
-              style={{ left: 11, top: 168, width: 134 }}
-            />
-            <Image
-              src="/assets/hero/student-female.png"
-              alt="A ByteSpace creator"
-              width={350}
-              height={630}
-              className="absolute object-contain object-bottom"
-              style={{ left: 70, top: 0, width: 350, height: 630 }}
-            />
-            <div
-              className="pointer-events-none absolute"
-              style={{ left: 350, top: 124, width: 141, height: 150 }}
-            >
-              <Ornament
-                src="/assets/ornaments/spiral-a.png"
-                mask="/assets/ornaments/spiral-a-mask.png"
-                tint="#d4fb20"
-                left={0}
-                top={0}
-                size={141}
-              />
-            </div>
-            <div className="absolute" style={{ left: 295, top: 390 }}>
-              <HappyStudents />
-            </div>
-          </div>
-
-          {/* compact stand-in below xl */}
-          <div className="relative mx-auto block h-[420px] w-[300px] xl:hidden">
+        <div className="flex flex-col gap-10">
+          <div className="relative mx-auto h-[420px] w-full max-w-[380px]">
             <Image
               src="/assets/hero/student-female.png"
               alt="A ByteSpace creator"
@@ -304,10 +332,7 @@ export default function Features() {
               className="object-contain"
             />
           </div>
-
-          <div className="xl:w-[580px] xl:shrink-0 xl:pt-[80px]">
-            <CreateText />
-          </div>
+          <CreateText />
         </div>
       </div>
     </section>
