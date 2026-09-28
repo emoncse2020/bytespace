@@ -30,25 +30,21 @@ export const TOPIC_TABS = [
   "Cooking",
 ];
 
-const THUMBS = [
-  "/assets/courses/thumb-sample.png",
-  "/assets/courses/thumb-data.jpg",
+/* Card order and artwork follow the design's grid, left to right. */
+const CATALOGUE: Array<[string, string]> = [
+  ["Learn Figma from Basic", "/assets/courses/thumb-figma.jpg"],
+  ["Build Digital Asset", "/assets/courses/thumb-sample.png"],
+  ["the Power of Big Data", "/assets/courses/thumb-data.jpg"],
+  ["Balancing Productivity and Self-Care", "/assets/courses/thumb-balance.jpg"],
+  ["Mastering Money Management", "/assets/courses/thumb-money.jpg"],
+  ["From Idea to Startup Success", "/assets/courses/thumb-startup.jpg"],
 ];
 
-const TITLES = [
-  "Build Digital Asset",
-  "the Power of Big Data",
-  "Balancing Productivity and Self-Care",
-  "Mastering Money Management",
-  "From Idea to Startup Success",
-  "Learn Figma from Basic",
-];
-
-export const COURSES: Course[] = TITLES.map((title, i) => ({
+export const COURSES: Course[] = CATALOGUE.map(([title, thumb], i) => ({
   id: `course-${i + 1}`,
   title,
   author: "purepearl studio",
-  thumb: THUMBS[i % THUMBS.length],
+  thumb,
   lessons: "17 Lessons",
   duration: "2 hours 16 mins",
   comments: "59 Comments",

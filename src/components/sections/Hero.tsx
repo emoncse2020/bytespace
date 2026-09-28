@@ -87,7 +87,7 @@ export default function Hero() {
       >
         <div
           className="absolute h-[541px] w-[578px]"
-          style={{ left: 431, top: 512, boxShadow: "var(--shadow-a)" }}
+          style={{ left: 431, top: 512 }}
         >
           <Image
             src="/assets/hero/student.png"
@@ -134,7 +134,7 @@ export default function Hero() {
             </span>
           </div>
           <div className="flex items-center">
-            {HERO_AVATARS.map((src, i) => (
+            {HERO_AVATARS.slice(0, 6).map((src, i) => (
               <Image
                 key={src}
                 src={src}
@@ -142,10 +142,10 @@ export default function Hero() {
                 width={43}
                 height={43}
                 className="-mr-4 rounded-full"
-                style={{ zIndex: HERO_AVATARS.length - i }}
+                style={{ zIndex: 6 - i }}
               />
             ))}
-            <span className="relative inline-flex size-[43px] items-center justify-center">
+            <span className="relative z-10 inline-flex size-[43px] items-center justify-center">
               <Image
                 src="/assets/hero/badge-2k.svg"
                 alt=""

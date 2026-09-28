@@ -229,13 +229,7 @@ export default function Features() {
         {/* block one — collage */}
         <At x={763} y={113} z={10}>
           <div style={{ width: 373 }}>
-            <CourseCard
-              badges={false}
-              course={{
-                ...COURSES[5],
-                thumb: "/assets/courses/thumb-figma.png",
-              }}
-            />
+            <CourseCard course={COURSES[0]} />
           </div>
         </At>
         <At x={759} y={114} z={20}>

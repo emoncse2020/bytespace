@@ -56,7 +56,7 @@ export default function CourseCard({
           <div className="flex flex-col">
             <Link
               href="#"
-              className="font-display track-tight text-[20px] leading-[28px] font-semibold text-ink-950 transition-colors hover:text-blue-800"
+              className="font-display track-tight block w-[235px] truncate text-[20px] leading-[28px] font-semibold text-ink-950 transition-colors hover:text-blue-800"
             >
               {course.title}
             </Link>
@@ -97,7 +97,7 @@ export default function CourseCard({
                   height={32}
                   className="absolute inset-0"
                 />
-                <span className="relative text-[12px] leading-[20px] font-medium text-white">
+                <span className="relative text-[12px] leading-[20px] font-medium text-gray-950">
                   {course.enrolled}
                 </span>
               </span>
