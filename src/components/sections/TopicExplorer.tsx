@@ -14,7 +14,7 @@ export default function TopicExplorer() {
     <section id="courses" className="pt-20 pb-10">
       <div className="container-1200 flex flex-col items-center gap-10 text-center">
         <div className="flex flex-col items-center gap-4">
-          <h2 className="font-display track-tight max-w-[917px] text-[32px] leading-[1.2] font-semibold text-ink-950 sm:text-[44px]">
+          <h2 className="font-display track-tight max-w-[540px] text-[32px] leading-[1.2] font-semibold text-ink-950 sm:text-[44px]">
             Discover Your Passion, Build Your Skills
           </h2>
           <p className="max-w-[760px] text-[16px] leading-[1.6] text-gray-400">
