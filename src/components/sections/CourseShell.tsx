@@ -1,10 +1,9 @@
 import Image from "next/image";
-import Link from "next/link";
-import type { ReactNode } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Chip from "@/components/ui/Chip";
 import CourseSidebar from "@/components/sections/CourseSidebar";
+import CourseTabs from "@/components/course/CourseTabs";
 import {
   PeopleIcon,
   ShareIcon,
@@ -15,23 +14,11 @@ const GRID =
   "repeating-linear-gradient(to right, rgba(255,255,255,0.122) 0 2px, transparent 2px 120px)," +
   "repeating-linear-gradient(to bottom, rgba(255,255,255,0.122) 0 2px, transparent 2px 120px)";
 
-const TABS = [
-  { label: "About", href: "/course" },
-  { label: "Lessons", href: "/course/lessons" },
-  { label: "Reviews", href: "/course/reviews" },
-];
-
 /**
  * Hero, enrolment sidebar and section tabs are identical across the three
  * course screens in the design; only the middle column changes.
  */
-export default function CourseShell({
-  tab,
-  children,
-}: {
-  tab: "About" | "Lessons" | "Reviews";
-  children: ReactNode;
-}) {
+export default function CourseShell() {
   return (
     <>
       <Header active="Courses" />
@@ -99,32 +86,7 @@ export default function CourseShell({
           <section className="bg-white pt-[62px] pb-24">
             <div className="container-1200">
               <div className="flex max-w-[725px] flex-col">
-                <div
-                  className="flex gap-3"
-                  role="tablist"
-                  aria-label="Course sections"
-                >
-                  {TABS.map((t) => {
-                    const isActive = t.label === tab;
-                    return (
-                      <Link
-                        key={t.label}
-                        href={t.href}
-                        role="tab"
-                        aria-selected={isActive}
-                        className={`flex h-[43px] items-center rounded-card px-4 text-[16px] font-medium transition-colors ${
-                          isActive
-                            ? "bg-lime-400 text-gray-950"
-                            : "bg-gray-50 text-gray-950 hover:bg-gray-100"
-                        }`}
-                      >
-                        {t.label}
-                      </Link>
-                    );
-                  })}
-                </div>
-
-                <div className="mt-[83px]">{children}</div>
+                <CourseTabs />
               </div>
             </div>
           </section>
