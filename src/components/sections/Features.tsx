@@ -147,15 +147,15 @@ function GrowthText() {
       <h2 className="font-display track-tight text-[32px] leading-[1.2] font-semibold text-ink-950 sm:text-[44px]">
         Your Path to Professional Growth Starts Here!
       </h2>
-      <p className="max-w-[480px] text-[16px] leading-[1.75] text-gray-700">
+      <p className="max-w-[505px] text-[18px] leading-[1.6] text-gray-700">
         Explore our curated selection of courses tailored to enhance your
         capabilities and accelerate your career journey. Whether you are looking
         to sharpen specific skills, gain industry expertise, or embark on a new
         career path entirely, we have the resources you need.
       </p>
-      <dl className="flex gap-[50px]">
+      <dl className="flex">
         {STATS.map((s) => (
-          <div key={s.label} className="flex flex-col">
+          <div key={s.label} className="flex w-[123px] flex-col">
             <dt className="font-display track-tight text-[36px] leading-[1.2] font-semibold text-blue-800">
               {s.value}
             </dt>
@@ -170,10 +170,10 @@ function GrowthText() {
 function CreateText() {
   return (
     <div className="flex flex-col gap-11">
-      <h2 className="font-display track-tight text-[32px] leading-[1.2] font-semibold text-ink-950 sm:text-[44px]">
+      <h2 className="font-display track-tight max-w-[400px] text-[32px] leading-[1.2] font-semibold text-ink-950 sm:text-[44px]">
         Create &amp; Manage Courses Easily.
       </h2>
-      <p className="text-[16px] leading-[1.75] text-gray-700">
+      <p className="max-w-[552px] text-[18px] leading-[1.6] text-gray-700">
         <span className="font-bold text-gray-950">ByteSpace</span> supports
         individuals or entities in the creation, publication, and administration
         of educational courses.
@@ -229,28 +229,34 @@ export default function Features() {
         {/* block one — collage */}
         <At x={763} y={113} z={10}>
           <div style={{ width: 373 }}>
-            <CourseCard course={{ ...COURSES[5], thumb: COURSES[0].thumb }} />
+            <CourseCard
+              badges={false}
+              course={{
+                ...COURSES[5],
+                thumb: "/assets/courses/thumb-figma.png",
+              }}
+            />
           </div>
         </At>
-        <At x={880} y={120} z={20}>
+        <At x={759} y={114} z={20}>
           <Image
             src="/assets/hero/student.png"
             alt="A ByteSpace learner"
-            width={500}
-            height={600}
-            className="object-cover object-top"
-            style={{ width: 500, height: 600 }}
+            width={576}
+            height={539}
+            className="object-contain"
+            style={{ width: 576, height: 539 }}
           />
         </At>
-        <At x={1209} y={212} z={30}>
-          <div style={{ width: 124, height: 162 }} className="relative">
+        <At x={1162} y={197} z={50}>
+          <div style={{ width: 216, height: 216 }} className="relative">
             <Ornament
-              src="/assets/ornaments/spiral-b.png"
-              mask="/assets/ornaments/spiral-b-mask.png"
+              src="/assets/ornaments/spiral-a.png"
+              mask="/assets/ornaments/spiral-a-mask.png"
               tint="#d4fb20"
               left={0}
               top={0}
-              size={124}
+              size={216}
             />
           </div>
         </At>
@@ -277,25 +283,25 @@ export default function Features() {
             width={134}
           />
         </At>
-        <At x={55} y={718} z={20}>
+        <At x={132} y={746} z={20}>
           <Image
             src="/assets/hero/student-female.png"
             alt="A ByteSpace creator"
-            width={589}
-            height={712}
+            width={535}
+            height={665}
             className="object-contain"
-            style={{ width: 589, height: 712 }}
+            style={{ width: 535, height: 665 }}
           />
         </At>
-        <At x={460} y={894} z={30}>
-          <div style={{ width: 141, height: 150 }} className="relative">
+        <At x={424} y={868} z={30}>
+          <div style={{ width: 216, height: 216 }} className="relative">
             <Ornament
-              src="/assets/ornaments/spiral-a.png"
-              mask="/assets/ornaments/spiral-a-mask.png"
+              src="/assets/ornaments/spiral-b.png"
+              mask="/assets/ornaments/spiral-b-mask.png"
               tint="#d4fb20"
               left={0}
               top={0}
-              size={141}
+              size={216}
             />
           </div>
         </At>

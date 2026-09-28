@@ -23,7 +23,14 @@ const AVATARS = [
   "/assets/courses/av-4.png",
 ];
 
-export default function CourseCard({ course }: { course: Course }) {
+export default function CourseCard({
+  course,
+  badges = true,
+}: {
+  course: Course;
+  /** false when the thumbnail already has the meta chips baked in */
+  badges?: boolean;
+}) {
   return (
     <article className="group w-full max-w-[373px] overflow-hidden rounded-card border border-gray-200 bg-white p-[15px] transition-shadow duration-300 hover:shadow-lg">
       {/* thumbnail with translucent meta badges */}
@@ -35,11 +42,13 @@ export default function CourseCard({ course }: { course: Course }) {
           sizes="341px"
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <div className="absolute bottom-3 left-3 flex flex-wrap gap-3">
-          <Chip variant="veil">{course.lessons}</Chip>
-          <Chip variant="veil">{course.duration}</Chip>
-          <Chip variant="veil">{course.comments}</Chip>
-        </div>
+        {badges ? (
+          <div className="absolute bottom-3 left-3 flex flex-wrap gap-3">
+            <Chip variant="veil">{course.lessons}</Chip>
+            <Chip variant="veil">{course.duration}</Chip>
+            <Chip variant="veil">{course.comments}</Chip>
+          </div>
+        ) : null}
       </div>
 
       <div className="flex items-start justify-between gap-2 pt-4">
