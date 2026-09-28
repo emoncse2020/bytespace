@@ -1,19 +1,28 @@
 import Image from "next/image";
 import Button from "@/components/ui/Button";
-import Ornament, { type OrnamentSpec } from "@/components/ui/Ornament";
 
-const LIME = "#d4fb20";
-const OFFWHITE = "#f5f5f6";
+/**
+ * The seven 3D decorations, at their positions on the 488px-tall band.
+ * Shapes that run off an edge in the design are anchored to that edge so
+ * they stay flush at any viewport width rather than to a fixed 1440 canvas.
+ */
+type Deco = {
+  src: string;
+  w: number;
+  h: number;
+  top: number;
+  left?: number;
+  right?: number;
+};
 
-/** Ornament cluster framing the CTA band (1440 x 488 canvas). */
-const ORNAMENTS: OrnamentSpec[] = [
-  { src: "/assets/ornaments/spiral-b.png", mask: "/assets/ornaments/spiral-b-mask.png", tint: LIME,     left: -80,  top: -60,  size: 300 },
-  { src: "/assets/ornaments/spiral-a.png", mask: "/assets/ornaments/spiral-a-mask.png", tint: OFFWHITE, left: 120,  top: 10,   size: 150 },
-  { src: "/assets/ornaments/cone-c.png",   mask: "/assets/ornaments/cone-c-mask.png",   tint: OFFWHITE, left: -20,  top: 300,  size: 160 },
-  { src: "/assets/ornaments/spiral-b.png", mask: "/assets/ornaments/spiral-c-mask.png", tint: LIME,     left: 60,   top: 360,  size: 190 },
-  { src: "/assets/ornaments/cone-b.png",   mask: "/assets/ornaments/cone-b-mask.png",   tint: LIME,     left: 1130, top: -20,  size: 180 },
-  { src: "/assets/ornaments/cone-a.png",   mask: "/assets/ornaments/cone-a-mask.png",   tint: OFFWHITE, left: 1290, top: 60,   size: 190 },
-  { src: "/assets/ornaments/spiral-a.png", mask: "/assets/ornaments/spiral-a-mask.png", tint: LIME,     left: 1200, top: 300,  size: 230 },
+const DECOS: Deco[] = [
+  { src: "spiral-lime-tl", w: 169, h: 175, top: 0, left: 0 },
+  { src: "spiral-white-tl", w: 122, h: 130, top: 30, left: 207 },
+  { src: "cone-white", w: 119, h: 160, top: 238, left: 0 },
+  { src: "torus-lime", w: 246, h: 134, top: 354, left: 66 },
+  { src: "pyramid-lime", w: 133, h: 145, top: 18, right: 206 },
+  { src: "cylinder-white", w: 169, h: 300, top: 41, right: 0 },
+  { src: "spiral-lime-br", w: 199, h: 165, top: 323, right: 66 },
 ];
 
 export default function CTA() {
@@ -22,16 +31,34 @@ export default function CTA() {
       id="creators"
       className="relative overflow-hidden bg-blue-800 py-20 lg:h-[488px] lg:py-0"
     >
-      <div className="pointer-events-none absolute inset-0 opacity-90">
-        <Image src="/assets/hero/grid.svg" alt="" fill className="object-cover" />
-      </div>
-
+      {/* the faint 120px grid the design draws over the blue:
+          2px lines of white at 12.2%, measured from the source render */}
       <div
-        className="pointer-events-none absolute top-0 left-1/2 hidden h-[488px] w-[1440px] -translate-x-1/2 xl:block"
-        aria-hidden
-      >
-        {ORNAMENTS.map((o) => (
-          <Ornament key={`${o.src}-${o.left}-${o.top}`} {...o} />
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(to right, rgba(255,255,255,0.122) 0 2px, transparent 2px 120px)," +
+            "repeating-linear-gradient(to bottom, rgba(255,255,255,0.122) 0 2px, transparent 2px 120px)",
+        }}
+      />
+
+      <div className="pointer-events-none absolute inset-0 hidden lg:block" aria-hidden>
+        {DECOS.map((d) => (
+          <Image
+            key={d.src}
+            src={`/assets/cta/${d.src}.png`}
+            alt=""
+            width={d.w}
+            height={d.h}
+            className="absolute max-w-none"
+            style={{
+              top: d.top,
+              left: d.left,
+              right: d.right,
+              width: d.w,
+              height: d.h,
+            }}
+          />
         ))}
       </div>
 
