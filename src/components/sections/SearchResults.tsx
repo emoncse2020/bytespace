@@ -3,19 +3,8 @@
 import { useState } from "react";
 import CourseCard from "@/components/cards/CourseCard";
 import { COURSES, SEARCH_TABS } from "@/data/content";
-import {
-  CategoryIcon,
-  ChevronLeft,
-  ChevronRight,
-  FilterIcon,
-  LevelIcon,
-  SortIcon,
-} from "@/components/ui/SearchIcons";
-
-const PILL =
-  "flex h-[48px] cursor-pointer items-center justify-center gap-2 rounded-pill " +
-  "border border-gray-200 bg-white px-4 text-[16px] text-gray-700 " +
-  "transition-colors hover:bg-gray-50";
+import { ChevronLeft, ChevronRight } from "@/components/ui/SearchIcons";
+import CourseFilterBar from "@/components/ui/CourseFilterBar";
 
 /* The design repeats the six courses across three pages of results. */
 const RESULTS = [...COURSES, ...COURSES, ...COURSES];
@@ -38,27 +27,7 @@ export default function SearchResults({ query = "" }: { query?: string }) {
   return (
     <section className="bg-white py-[72px]">
       <div className="container-1200 flex flex-col gap-10">
-        {/* filter row */}
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-4">
-            <button className={`${PILL} w-[96px]`}>
-              <FilterIcon size={20} />
-              Filter
-            </button>
-            <button className={`${PILL} w-[97px]`}>
-              <LevelIcon size={20} />
-              Level
-            </button>
-            <button className={`${PILL} w-[127px]`}>
-              <CategoryIcon size={20} />
-              Category
-            </button>
-          </div>
-          <button className={`${PILL} w-[157px]`}>
-            <SortIcon size={20} />
-            Most relevant
-          </button>
-        </div>
+        <CourseFilterBar />
 
         {/* topic chips */}
         <div

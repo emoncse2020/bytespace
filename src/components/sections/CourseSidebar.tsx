@@ -95,7 +95,7 @@ export default function CourseSidebar() {
         <p className="text-[16px] leading-[1.6] text-gray-700">
           Ready to Dive In? Enroll Now and Start Building Your Digital Future!
         </p>
-        <Button variant="outline" className="w-max">
+        <Button href="/creator" variant="outline" className="w-max">
           See Full Profile
         </Button>
       </div>
